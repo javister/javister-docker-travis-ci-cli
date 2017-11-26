@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -e
+
+. proxyenv
+
+if [ "$1" == "bash" ]; then
+    shift 1
+    setuser system bash $@
+elif [ "$1" == "root" ]; then
+    shift 1
+    bash $@
+else
+    HOME=/config/travis setuser system travis $@
+fi
