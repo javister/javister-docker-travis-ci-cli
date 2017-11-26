@@ -17,6 +17,8 @@ docker run \
     -ti \
     --rm \
     -v "$(pwd)":"$(pwd)" \
+    -v "$HOME":"$HOME" \
+    -e HOME="$HOME" \
     -e PUID=$(id -u) \
     -e PGID=$(id -g) \
     -e http_proxy="${http_proxy}" \
@@ -33,6 +35,8 @@ travis_func() {
         -ti \
         --rm \
         -v "$(pwd)":"$(pwd)" \
+        -v "$HOME":"$HOME" \
+        -e HOME="$HOME" \
         -e PUID=$(id -u) \
         -e PGID=$(id -g) \
         -e http_proxy="${http_proxy}" \
