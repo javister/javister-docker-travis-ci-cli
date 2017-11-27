@@ -38,4 +38,4 @@ RUN . /usr/local/bin/yum-proxy && \
     chmod --recursive +x /etc/my_init.d/*.sh /etc/service /usr/local/bin/*
 
 ENTRYPOINT ["my_init", "--skip-runit", "--", "travis-docker"]
-CMD ["--help"]
+#CMD [""]

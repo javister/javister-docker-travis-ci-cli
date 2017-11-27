@@ -4,6 +4,15 @@ set -e
 
 . proxyenv
 
+usermod -d ${USER_HOME} system
+
+( setuser system bash -c "echo 'y' | HOME=${USER_HOME} travis whoami" || true ) &>/dev/null
+
+if [ "${SET_GIT_PROXY}" == "yes" ] && [ ! -z "${http_proxy}" ]; then
+    setuser system git config --global http.proxy ${http_proxy}
+    setuser system git config --global https.proxy ${http_proxy}
+fi
+
 if [ "$1" == "bash" ]; then
     shift 1
     setuser system bash $@
@@ -11,5 +20,5 @@ elif [ "$1" == "root" ]; then
     shift 1
     bash $@
 else
-    setuser system bash -c "HOME=${USER_HOME} travis $@"
+    setuser system travis $@
 fi
