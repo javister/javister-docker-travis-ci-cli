@@ -1,5 +1,8 @@
 #!/bin/bash -e
 
+IMAGE_TAG="javister-docker-docker.bintray.io/javister/javister-docker-travis-ci-cli"
+VERSION=1.0
+
 function build() {
     local release
     release="dry"
@@ -34,24 +37,19 @@ EOF
     done
     shift $((OPTIND-1))
 
-    VERSION=1.0
-    DATE=$(date +"%Y-%m-%d")
-
-    IMAGE_TAG="javister-docker-docker.bintray.io/javister/javister-docker-travis-ci-cli"
     PROXY_ARGS="--build-arg http_proxy=${http_proxy} \
                 --build-arg no_proxy=${no_proxy}"
-    [ "${doPull}" == "yes" ] && docker pull javister-docker-docker.bintray.io/javister/javister-docker-base:1.0
+    [ "${doPull}" == "yes" ] && docker pull javister-docker-docker.bintray.io/javister/javister-docker-base:1.0 || true
 
     docker build \
-        --build-arg DATE="${DATE}" \
         --tag ${IMAGE_TAG}:latest \
         --tag ${IMAGE_TAG}:${VERSION} \
         ${PROXY_ARGS} \
         $@ \
         .
 
-    [ "${release}" == "release" ] && docker push ${IMAGE_TAG}:latest
-    [ "${release}" == "release" ] && docker push ${IMAGE_TAG}:${VERSION}
+    [ "${release}" == "release" ] && docker push ${IMAGE_TAG}:latest || true
+    [ "${release}" == "release" ] && docker push ${IMAGE_TAG}:${VERSION} || true
 }
 
 trap "exit 1" INT TERM QUIT

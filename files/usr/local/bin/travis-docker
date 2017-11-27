@@ -11,5 +11,5 @@ elif [ "$1" == "root" ]; then
     shift 1
     bash $@
 else
-    setuser system travis $@
+    setuser system bash -c "HOME=${USER_HOME} travis $@"
 fi

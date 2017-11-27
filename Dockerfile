@@ -1,15 +1,12 @@
 FROM javister-docker-docker.bintray.io/javister/javister-docker-ruby:2
 MAINTAINER Viktor Verbitsky <vektory79@gmail.com>
 
-ARG DATE
-
-LABEL \
-    image.date="${DATE}"
-
 COPY files /
 
-ENV BASE_RPMLIST="$BASE_RPMLIST libffi.x86_64" \
-    BUILD_RPMLIST="$BUILD_RPMLIST libffi-devel.x86_64 "
+ENV BASE_RPMLIST="$BASE_RPMLIST libffi.x86_64 git" \
+    BUILD_RPMLIST="$BUILD_RPMLIST libffi-devel.x86_64 " \
+    SET_GIT_PROXY="yes" \
+    USER_HOME="/config"
 
 RUN . /usr/local/bin/yum-proxy && \
     echo "*** Hack for libffi-devel" && \
@@ -34,7 +31,6 @@ RUN . /usr/local/bin/yum-proxy && \
     echo '*** Install Travis CI CLI utility' && \
     gem install travis --no-rdoc --no-ri && \
     mkdir -p /config/travis && \
-    (echo "y" | HOME=/config/travis travis whoami || true) && \
     echo '*** Clean up yum caches' && \
     yum-clean-build && \
     yum-clean && \
