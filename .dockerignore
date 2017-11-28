@@ -5,3 +5,6 @@ README.md
 .gitignore
 build.sh
 run*
+config.properties
+downstream.txt
+tmp

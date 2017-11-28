@@ -1,6 +1,7 @@
 # Docker образ с клиентом Travis CI
 
 [ ![Download](https://api.bintray.com/packages/javister/docker/javister%3Ajavister-docker-travis-ci-cli/images/download.svg) ](https://bintray.com/javister/docker/javister%3Ajavister-docker-travis-ci-cli/_latestVersion)
+[![Build Status](https://travis-ci.org/javister/javister-docker-travis-ci-cli.svg?branch=master)](https://travis-ci.org/javister/javister-docker-travis-ci-cli)
 
 ## Введение
 
