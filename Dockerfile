@@ -1,4 +1,4 @@
-FROM javister-docker-docker.bintray.io/javister/javister-docker-ruby:2
+FROM javister-docker-docker.bintray.io/javister/javister-docker-ruby:2.1
 MAINTAINER Viktor Verbitsky <vektory79@gmail.com>
 
 COPY files /
